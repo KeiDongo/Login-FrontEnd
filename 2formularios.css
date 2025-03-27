@@ -1,3 +1,14 @@
+/* Variables CSS para diseño responsive */
+:root {
+  --base-size: calc(14px + 0.3vw);
+  --padding-responsive: calc(8px + 1vw);
+  --border-radius-responsive: calc(8px + 0.5vw);
+  --container-width: min(90%, 500px);
+  --input-width: min(90%, 300px);
+  --btn-width: min(90%, 250px);
+  --animation-distance: calc(-1 * min(100vh, 100vw));
+}
+
 /* Animaciones */
 @keyframes aparecer {
   from { opacity: 0; }
@@ -7,13 +18,13 @@
 @keyframes caidaRebote {
   0% {
     opacity: 0;
-    transform: translateY(-100vh) scale(1.5);
+    transform: translateY(var(--animation-distance)) scale(1.5);
   }
   60% {
-    transform: translateY(30px) scale(0.95);
+    transform: translateY(5vh) scale(0.98);
   }
   80% {
-    transform: translateY(-10px) scale(1.02);
+    transform: translateY(-2vh) scale(1.02);
   }
   100% {
     opacity: 1;
@@ -32,83 +43,96 @@
   }
 }
 
-/* Estilos generales */
+/* Reset y estilos base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   text-align: center;
   font-family: 'Minecraftia', sans-serif;
-  background-color: #F4D03F;
   background: linear-gradient(to bottom, black, #273746, #2E86C1, #5DADE2);
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  margin: 0;
-  padding: 20px;
+  padding: var(--padding-responsive);
   animation: aparecer 0.8s ease-out forwards;
+  font-size: var(--base-size);
 }
 
-/* Contenedor principal */
+/* Contenedor principal completamente responsive */
 .section-body {
   position: relative;
-  border-radius: 20px;
-  padding: 2rem;
+  border-radius: var(--border-radius-responsive);
+  padding: clamp(1rem, 3vw, 2rem);
   background-color: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(1px);
+  backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  width: 450px;
-  min-height: 350px;
-  border: solid rgba(255, 255, 255, 0.5);
+  width: var(--container-width);
+  min-height: auto;
+  border: 1px solid rgba(255, 255, 255, 0.5);
   animation: caidaRebote 1s ease-out forwards;
+  will-change: transform, opacity;
 }
 
-/* Título */
+/* Título responsive */
 h1 {
-  margin: 10px 0 -10px 0;
+  margin: clamp(10px, 2vw, 20px) 0 clamp(-10px, -1vw, 0);
   color: white;
-  font-size: 24px;
+  font-size: clamp(1.5rem, 4vw, 2rem);
   animation: caidaRebote 1s ease-out forwards;
   animation-delay: 0.2s;
 }
 
-/* Inputs */
+/* Inputs adaptables */
 .inputs {
   border: none;
   outline: none;
   color: white;
   font-family: 'Minecraftia', sans-serif;
   background: rgba(255, 255, 255, 0.2);
-  padding: 10px 20px;
-  margin-top: 15px;
-  border-radius: 10px;
+  padding: clamp(0.75rem, 2vw, 1rem) clamp(1rem, 3vw, 1.5rem);
+  margin: clamp(0.5rem, 1.5vw, 1rem) 0;
+  border-radius: var(--border-radius-responsive);
   box-shadow: 3px 4px 1px 1px rgba(255, 255, 255, 1);
   transition: all 0.2s;
   animation: caidaRebote 1s ease-out forwards;
   animation-delay: 0.4s;
+  width: 100%;
+  max-width: var(--input-width);
+  font-size: var(--base-size);
 }
 
 .inputs:focus {
   background: rgba(255, 255, 255, 0.5);
 }
 
-/* Botón */
+/* Botón completamente adaptable */
 .btn {
-  border-radius: 10px;
-  padding: 12px 50px;
-  width: 250px;
+  border-radius: var(--border-radius-responsive);
+  padding: clamp(0.75rem, 2vw, 1rem);
+  width: var(--btn-width);
   color: white;
   font-family: 'Minecraftia', sans-serif;
-  font-size: 16px;
+  font-size: var(--base-size);
   border: none;
   outline: none;
   box-shadow: 3px 4px 1px 1px rgba(255, 255, 255, 1);
   background: #5DADE2;
   position: relative;
   overflow: hidden;
-  margin-top: 15px;
+  margin: clamp(1rem, 2vw, 1.5rem) 0;
   transition: all 0.2s ease;
   cursor: pointer;
   animation: caidaRebote 1s ease-out forwards;
   animation-delay: 0.6s;
+  min-height: 44px; /* Tamaño mínimo para áreas táctiles */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn:hover {
@@ -143,17 +167,19 @@ h1 {
 ::placeholder {
   color: white;
   opacity: 0.7;
+  font-size: var(--base-size);
 }
 
-/* Enlace */
+/* Enlace responsive */
 a {
   color: white;
   text-decoration: none;
-  font-size: 12px;
+  font-size: clamp(0.75rem, 2.5vw, 1rem);
   outline: none;
   transition: all 0.3s;
   display: inline-block;
-  margin-top: 15px;
+  margin: clamp(0.5rem, 1.5vw, 1rem) 0;
+  padding: 0.5rem;
   animation: caidaRebote 1s ease-out forwards;
   animation-delay: 0.8s;
 }
@@ -162,16 +188,63 @@ a:hover {
   opacity: .5;
 }
 
-/* Asegurar que todos los elementos comiencen ocultos */
-body.loaded .section-body,
-body.loaded .section-body * {
-  opacity: 0;
+/* Media Queries para ajustes específicos */
+@media (max-width: 768px) {
+  :root {
+    --base-size: calc(12px + 0.5vw);
+    --border-radius-responsive: calc(6px + 0.5vw);
+  }
+  
+  body {
+    padding: 10px;
+  }
+  
+  .section-body {
+    width: 95%;
+    padding: 1.5rem;
+  }
+  
+  /* Optimización de animaciones para móviles */
+  @keyframes caidaRebote {
+    0% {
+      transform: translateY(-50vh) scale(1.2);
+    }
+    60% {
+      transform: translateY(2vh) scale(0.98);
+    }
+    100% {
+      transform: translateY(0) scale(1);
+    }
+  }
 }
 
-/* Clase para activar con JavaScript */
-body.animar .section-body,
-body.animar .section-body * {
-  opacity: 1;
+/* Modo landscape en móviles */
+@media (max-height: 500px) and (orientation: landscape) {
+  body {
+    align-items: flex-start;
+    padding-top: 20px;
+  }
+  
+  .section-body {
+    margin-top: 20px;
+    min-height: auto;
+  }
 }
 
-/*hermano ya no toco codigo dentro de 4 meses fijo*/
+/* Dispositivos muy pequeños (relojes inteligentes) */
+@media (max-width: 300px) {
+  :root {
+    --base-size: 12px;
+  }
+  
+  .inputs, .btn {
+    padding: 0.5rem;
+  }
+}
+
+/* Pantallas extra grandes */
+@media (min-width: 2000px) {
+  :root {
+    --base-size: 18px;
+  }
+}
