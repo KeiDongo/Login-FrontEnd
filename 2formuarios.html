@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Formulario de Registro</title>
+    <link rel="stylesheet" type="text/css" href="2formularios.css">
+    <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
+</svg>
+</head>
+<body>
+    <main>
+        <section class="section-body">
+            <header>
+                <h1>Inicio De Sesión</h1><br>
+            </header>
+            <form action="2resultado.html" method="POST">
+                <div>
+                    <input type="email" name="email" id="email" class="inputs" required placeholder="Usuario">
+                </div><br>
+                <div>
+                    <input type="password" name="contrasena" id="contrasena" placeholder="Contraseña" class="inputs" required minlength="8">
+                </div><br>
+                <div>
+                    <button type="submit" class="btn">Iniciar Sesión</button><br><br>
+                    <a = href="">¿No tienes una cuenta? Registrate Aqui!</a>
+                </div>
+
+            </form>
+        </section>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                document.body.classList.remove('loaded');
+                document.body.classList.add('animar');
+            }, 100);
+        });
+    </script>
+</body>
+</html>
